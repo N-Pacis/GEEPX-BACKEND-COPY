@@ -1,0 +1,1748 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "GEEPX E-Commerce Backend",
+    "title": "GEEPX E-Commerce",
+    "termsOfService": "http://swagger.io/terms/",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "BRAND CONTROLLER",
+      "description": "Operations on brands"
+    },
+    {
+      "name": "CART CONTROLLER",
+      "description": "Operations on cart"
+    },
+    {
+      "name": "FAVORITE CONTROLLER",
+      "description": "Operations on favorites"
+    },
+    {
+      "name": "CATEGORY CONTROLLER",
+      "description": "Operations on categories"
+    },
+    {
+      "name": "ORDER CONTROLLER",
+      "description": "Operations on Orders"
+    },
+    {
+      "name": "PRODUCT CONTROLLER",
+      "description": "Operations on Products"
+    },
+    {
+      "name": "USER CONTROLLER",
+      "description": "Operations on Users"
+    }
+  ],
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "bearerFormat": "JWT",
+      "scheme": "bearer"
+    }
+  },
+  "paths": {
+    "/v1/brands/some": {
+      "get": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Get some brands",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "the page you are at",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/add": {
+      "post": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Register a new product",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": "true"
+              },
+              "category": {
+                "type": "string",
+                "required": "true"
+              },
+              "brand": {
+                "type": "string",
+                "required": "true"
+              },
+              "price": {
+                "type": "number",
+                "required": "true"
+              },
+              "quantity": {
+                "type": "number",
+                "required": "true"
+              },
+              "sku": {
+                "type": "string",
+                "required": "true"
+              },
+              "weight": {
+                "type": "number"
+              },
+              "description": {
+                "type": "string"
+              },
+              "store": {
+                "type": "string"
+              },
+              "variant": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "object",
+                    "properties": {
+                      "height": {
+                        "type": "number"
+                      },
+                      "width": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "expireDate": {
+                "type": "string"
+              },
+              "batchNumber": {
+                "type": "number"
+              },
+              "origin": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/add-product-discount": {
+      "put": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Edit a product",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "productId",
+            "description": "id of the product",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "query",
+            "name": "discount",
+            "description": "discount of the product",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/edit/{id}": {
+      "put": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Edit a product",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "id of the product",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": "true"
+              },
+              "category": {
+                "type": "string",
+                "required": "true"
+              },
+              "brand": {
+                "type": "string",
+                "required": "true"
+              },
+              "price": {
+                "type": "number",
+                "required": "true"
+              },
+              "quantity": {
+                "type": "number",
+                "required": "true"
+              },
+              "sku": {
+                "type": "string",
+                "required": "true"
+              },
+              "weight": {
+                "type": "number"
+              },
+              "description": {
+                "type": "string"
+              },
+              "store": {
+                "type": "string"
+              },
+              "variant": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "type": "string"
+                  },
+                  "size": {
+                    "type": "object",
+                    "properties": {
+                      "height": {
+                        "type": "number"
+                      },
+                      "width": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "expireDate": {
+                "type": "string"
+              },
+              "batchNumber": {
+                "type": "number"
+              },
+              "origin": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/all": {
+      "get": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Get all products",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/by-id/{id}": {
+      "get": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Get product by id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "id of the product",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/get-brand-products": {
+      "get": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Get products by brand",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "the page you are at",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "query",
+            "name": "id",
+            "description": "the brand id you are going to get from",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/some": {
+      "get": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Get some products",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "the page you are at",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/search": {
+      "get": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Search product",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "type": "string",
+            "properties": {
+              "search": {
+                "type": "string",
+                "required": "true"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/activate/{id}": {
+      "patch": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Activate a product",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the product",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/deactivate/{id}": {
+      "patch": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Deactivate a product",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the product",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/products/{id}/add-cover-photo": {
+      "put": {
+        "tags": ["PRODUCT CONTROLLER"],
+        "summary": "Add a product cover photo",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the product",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "formData",
+            "name": "cover-photo",
+            "description": "Cover photo of the product",
+            "type": "file",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/categories/save": {
+      "post": {
+        "tags": ["CATEGORY CONTROLLER"],
+        "summary": "Register a new category",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": "true"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/categories/update/{id}": {
+      "put": {
+        "tags": ["CATEGORY CONTROLLER"],
+        "summary": "Update a category",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the product",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": "true"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/categories/all": {
+      "get": {
+        "tags": ["CATEGORY CONTROLLER"],
+        "summary": "Get all categories",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/categories/by-id/{id}": {
+      "get": {
+        "tags": ["CATEGORY CONTROLLER"],
+        "summary": "Get category by id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "id of the category",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/categories/activate/{id}": {
+      "patch": {
+        "tags": ["CATEGORY CONTROLLER"],
+        "summary": "Activate a category",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the category",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/categories/deactivate/{id}": {
+      "patch": {
+        "tags": ["CATEGORY CONTROLLER"],
+        "summary": "Deactivate a category",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the category",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/save": {
+      "post": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Register a new brand",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": "true"
+              },
+              "description": {
+                "type": "string"
+              },
+              "countryOrigin": {
+                "type": "string"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+
+    "/v1/brands/get-brand-category-products": {
+      "get": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Get categories of a brand",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "categoryId",
+            "description": "Id of the category",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "description": "Page number",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/get-brand-categories": {
+      "get": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Get categories of a brand",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "Id of the brand",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/update/{id}": {
+      "put": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Update a brand",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the brand",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": "true"
+              },
+              "description": {
+                "type": "string"
+              },
+              "countryOrigin": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/all": {
+      "get": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Get all brands",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/by-id/{id}": {
+      "get": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Get brand by id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "id of the brand",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/activate/{id}": {
+      "patch": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Activate a brand",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the brand",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/deactivate/{id}": {
+      "patch": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Deactivate a brand",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the brand",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/{id}/add-cover-photo": {
+      "put": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Add a brand logo",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the brand",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "formData",
+            "name": "cover-photo",
+            "description": "Cover photo of the brand",
+            "type": "file",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/brands/{id}/add-logo": {
+      "put": {
+        "tags": ["BRAND CONTROLLER"],
+        "summary": "Add a brand logo",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the brand",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "formData",
+            "name": "logo",
+            "description": "Logo of the brand",
+            "type": "file",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/orders/create": {
+      "post": {
+        "tags": ["ORDER CONTROLLER"],
+        "summary": "Create an order",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "otherDetails": {
+                "type": "string"
+              },
+              "shipping": {
+                "type": "object",
+                "properties": {
+                  "area": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "city": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "region": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "country": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "zipcode": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "required": "true"
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "required": "true"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/orders/all": {
+      "get": {
+        "tags": ["ORDER CONTROLLER"],
+        "summary": "Get all orders",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/cart/all": {
+      "get": {
+        "tags": ["CART CONTROLLER"],
+        "summary": "Get all cart",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/cart/add": {
+      "post": {
+        "tags": ["CART CONTROLLER"],
+        "summary": "Add to cart",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "productId": {
+                "type": "string",
+                "required": "true"
+              },
+              "quantity": {
+                "type": "number"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/cart/update/{id}": {
+      "put": {
+        "tags": ["CART CONTROLLER"],
+        "summary": "Update a cart",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the cart",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "quantity": {
+                "type": "number"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/cart/delete/{id}": {
+      "delete": {
+        "tags": ["CART CONTROLLER"],
+        "summary": "Delete a cart",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the cart",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/users/standard/register": {
+      "post": {
+        "tags": ["USER CONTROLLER"],
+        "summary": "Register standard user",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "firstname": {
+                "type": "string",
+                "required": "true"
+              },
+              "lastname": {
+                "type": "string",
+                "required": "true"
+              },
+              "email": {
+                "type": "string",
+                "required": "true"
+              },
+              "phoneNumber": {
+                "type": "string",
+                "required": "true"
+              },
+              "password": {
+                "type": "string",
+                "required": "true"
+              },
+              "address": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/users/standard/oauth/register": {
+      "post": {
+        "tags": ["USER CONTROLLER"],
+        "summary": "Register OAuth standard user",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "firstname": {
+                "type": "string",
+                "required": "true"
+              },
+              "lastname": {
+                "type": "string",
+                "required": "true"
+              },
+              "email": {
+                "type": "string",
+                "required": "true"
+              },
+              "phoneNumber": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/users/admin/register": {
+      "post": {
+        "tags": ["USER CONTROLLER"],
+        "summary": "Register admin user",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "firstname": {
+                "type": "string",
+                "required": "true"
+              },
+              "lastname": {
+                "type": "string",
+                "required": "true"
+              },
+              "email": {
+                "type": "string",
+                "required": "true"
+              },
+              "phoneNumber": {
+                "type": "string",
+                "required": "true"
+              },
+              "password": {
+                "type": "string",
+                "required": "true"
+              },
+              "address": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/users/login": {
+      "post": {
+        "tags": ["USER CONTROLLER"],
+        "summary": "login",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "email": {
+                "type": "string",
+                "required": "true"
+              },
+              "password": {
+                "type": "string",
+                "required": "true"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/users/logged-in-user/profile": {
+      "get": {
+        "tags": ["USER CONTROLLER"],
+        "summary": "Logged in user profile",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/users/all": {
+      "get": {
+        "tags": ["USER CONTROLLER"],
+        "summary": "Get all users",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/users/activate/{id}": {
+      "put": {
+        "tags": ["USER CONTROLLER"],
+        "summary": "Activate a user",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the user",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/users/deactivate/{id}": {
+      "put": {
+        "tags": ["USER CONTROLLER"],
+        "summary": "Deactivate a user",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the user",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/favorites/all": {
+      "get": {
+        "tags": ["FAVORITE CONTROLLER"],
+        "summary": "Get all favorites",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/favorites/add": {
+      "post": {
+        "tags": ["FAVORITE CONTROLLER"],
+        "summary": "Add to favorites",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "type": "object",
+            "consumes": "application/json",
+            "properties": {
+              "productId": {
+                "type": "string",
+                "required": "true"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/favorites/remove/{id}": {
+      "delete": {
+        "tags": ["FAVORITE CONTROLLER"],
+        "summary": "Remove from favorites",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Id of the favorite",
+            "type": "string",
+            "required": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}
